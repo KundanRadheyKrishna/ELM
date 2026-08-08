@@ -1,14 +1,42 @@
 import mongoose from "mongoose"
 
 const userSchema = new mongoose.Schema({
-    username:{
+    username: {
         type: String,
         required: true,
         trim: true
     },
-    // email ka kaam karna hai ok 
-},{timestamps: true})
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true,
+        match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"]
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    department: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    role: {
+        type: String,
+        required: true,
+        enum: ["Admin", "VC", "HOD", "Employee"]
+    },
+    isFirstLogin: {
+        type: Boolean,
+        default: true
+    },
+    profileImage: {
+        type: String,
+        default: null
+    }
+}, { timestamps: true })
 
 export const User = mongoose.model("User", userSchema)
-
-// dekho ab jo bol rahe hai usko memory main store kar lena ok  admion  eploye ko add karega employe apna name  emial dega goggle ka ok or admin ke pass jayega fir user ko add akrega admin pcuhega ki kon ho thum tho naem  email dega or kon sa departemnt main ho or 
