@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema({
         trim: true
     },
     department: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Department",
         required: true,
         trim: true
     },
