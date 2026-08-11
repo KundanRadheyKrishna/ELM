@@ -9,7 +9,14 @@ const port = process.env.PORT
 const app = express();
 
 connectDB()
-
-app.listen(port,()=>{
-    console.log(`Server is running ${port}`)
-})
+.then(() => {
+    app.listen(port,()=>{
+        console.log(`server is running ${port}`)
+    })
+    app.on("error",(error)=>{
+        console.log("ERROR",error)
+        throw error
+    })
+}).catch((err) => {
+    console.log("MONGODB CONNECTION FAILD !!! ",err)
+});
